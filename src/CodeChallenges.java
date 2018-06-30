@@ -24,6 +24,24 @@ public class CodeChallenges {
         //test problem 6
         System.out.println(area(5.0));
         System.out.println(area(5.0, 4.0));
+
+        // test problem 7
+        System.out.println(areEqualByThreeDecimalPlaces(5.014, 5.013));
+
+        // test problem 8
+        System.out.println(hasEqualSum(1,1,2));
+
+        //test problem 9
+        System.out.println(hasTeen(22, 23, 34));
+
+        // test problem 10
+        printYearsAndDays(0);
+
+        //test problem 11
+        printEqual(1,2,3);
+
+        //test problem 12
+        System.out.println(isCatPlaying(false, 35));
     }
 
     public static void printMegaBytesAndKiloBytes(int kiloBytes) {
@@ -89,6 +107,31 @@ public class CodeChallenges {
         }
     }
 
+    public static boolean areEqualByThreeDecimalPlaces (double numberOne, double numberTwo) {
+        int aa = (int)(numberOne * 1000);
+        int bb = (int)(numberTwo * 1000);
+
+        if( aa == bb) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static boolean hasEqualSum(int numberOne, int numberTwo, int numberThree) {
+        if((numberOne + numberTwo) == numberThree) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static boolean hasTeen(int numberOne, int numberTwo, int numberThree) {
+        if((numberOne >= 13 && numberOne <= 19) || (numberTwo >= 13 && numberTwo <= 19) || (numberThree >= 13 && numberThree <= 19)) {
+            return true;
+        } else return false;
+    }
+
     public static double area(double radius) {
         if(radius < 0) {
             return -1;
@@ -103,6 +146,42 @@ public class CodeChallenges {
             return -1;
         } else {
             return x * y;
+        }
+    }
+
+    public static void printYearsAndDays(long minutes) {
+
+        if(minutes < 0) {
+            System.out.println(INVALID_VALUE_MESSAGE);
+        } else {
+
+            long day = minutes / 1440;
+            long year = day / 365;
+            long remainderInDays = day % 365;
+
+            System.out.println(minutes + " min = " + year + " y and " + remainderInDays + " d" );
+        }
+    }
+
+    public static void printEqual(int numberOne, int numberTwo, int numberThree) {
+        if(numberOne < 0 || numberTwo < 0 || numberThree < 0) {
+            System.out.println(INVALID_VALUE_MESSAGE);
+        } else if((numberOne == numberTwo) && (numberTwo == numberThree)) {
+            System.out.println("All numbers are equal");
+        } else if((numberOne != numberTwo) && (numberTwo != numberThree) && (numberThree != numberOne)) {
+            System.out.println("All numbers are different");
+        } else {
+            System.out.println("Neither all are equal or different");
+        }
+    }
+
+    public static boolean isCatPlaying(boolean summer, int temperature) {
+        if(!summer && (temperature >= 25 && temperature <= 35)) {
+            return true;
+        } else if (summer && (temperature >= 25 && temperature <= 45)) {
+            return true;
+        } else {
+            return false;
         }
     }
 }
