@@ -107,6 +107,26 @@ public class Loops {
         // code test 9 cont.
         int digitCountResult = getDigitCount(5200);
         System.out.println(digitCountResult);
+
+        // code test 10
+        int evenSum = getEvenDigitSum(252);
+        System.out.println(evenSum);
+
+        // code test 11
+        System.out.println(hasSharedDigit(15, 55));
+
+        // code test 12
+        System.out.println(hasSameLastDigit(9, 99, 999));
+
+        // code test 13
+        int divisorResult = getGreatestCommonDivisor(81, 153);
+        System.out.println(divisorResult);
+
+        // code test 14
+        printFactors(-1);
+
+        // code test 15
+        System.out.println(isPerfectNumber(28));
     }
 
 
@@ -213,6 +233,114 @@ public class Loops {
         sum += firstDigit;
         // return the sum
         return sum;
+    }
+
+    public static int getEvenDigitSum(int number) {
+        int sum = 0;
+        if(number < 0) {
+            return -1;
+        }
+
+        while(number > 0) {
+            // first get the last digit of the passed in number
+            int lastDigit = number % 10;
+            // if that last digit divides evenly into 2 it's an even number
+            if(lastDigit % 2 == 0) {
+                // add the digit to the running sum total
+                sum += lastDigit;
+            }
+            // move left by one digit for the while loop
+            number /= 10;
+        }
+        // return the sum
+        return sum;
+    }
+
+    public static boolean hasSharedDigit(int numberOne, int numberTwo) {
+        if((numberOne <= 9 || numberOne >= 100) || (numberTwo <= 9 || numberTwo >= 100)) {
+            return false;
+        }
+
+        int aa = numberOne % 10;
+        numberOne /= 10;
+        int bb = numberOne %10;
+
+        int cc = numberTwo % 10;
+        numberTwo /= 10;
+        int dd = numberTwo % 10;
+
+        if((aa == cc) || (aa == dd) || (bb == cc) || (bb == dd)) {
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean hasSameLastDigit(int numberOne, int numberTwo, int numberThree) {
+        if((numberOne <= 9 || numberOne >= 1001) || (numberTwo <= 9 || numberTwo >= 1001)) {
+            return false;
+        }
+
+        int aa = numberOne % 10;
+
+        int bb = numberTwo %10;
+
+        int cc = numberThree % 10;
+
+        if((aa == bb) || (aa == cc) || (bb == cc)) {
+            return true;
+        }
+        return false;
+    }
+
+    public static int getGreatestCommonDivisor(int first, int second) {
+        int hCommonDivisor = 1;
+
+        if(first < 10 || second < 10) {
+            return -1;
+        } else {
+            int digit = 1;
+            int max = first;
+            if(first < second) {
+                max = second;
+            }
+            while(digit < max) {
+                if((first % digit == 0) && (second % digit == 0))  {
+                    hCommonDivisor = digit;
+                }
+                digit++;
+            }
+            return hCommonDivisor;
+        }
+    }
+
+    public static void printFactors(int number) {
+        if(number < 1) {
+            System.out.println("Invalid Value");
+        } else {
+            int digit = 1;
+            while(digit <= number) {
+                if(number % digit == 0) {
+                    System.out.println(digit);
+                }
+                digit++;
+            }
+        }
+    }
+
+    public static boolean isPerfectNumber(int number) {
+        if(number < 1) {
+            return false;
+        } else {
+            int digit = 1;
+            int sum = 0;
+            while(digit < number) {
+                if(number % digit == 0) {
+                    sum += digit;
+                }
+                digit++;
+            }
+            return sum == number;
+        }
     }
 
     public static void numberToWords(int number) {
