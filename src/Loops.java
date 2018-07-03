@@ -127,6 +127,9 @@ public class Loops {
 
         // code test 15
         System.out.println(isPerfectNumber(28));
+
+        //code test 16
+        System.out.println(canPack(2,1,5));
     }
 
 
@@ -426,5 +429,24 @@ public class Loops {
         } while (number > 0);
 
         return count;
+    }
+
+    public static boolean canPack(int bigCount, int smallCount, int goal) {
+        if(bigCount < 0 || smallCount < 0 || goal < 0) {
+            return false;
+        }
+
+        int largeKilo = 5;
+
+        if (bigCount * largeKilo == goal) return true;
+
+        if (bigCount * largeKilo > goal) {
+            return goal % largeKilo <= smallCount;
+        }
+
+        if (bigCount * largeKilo < goal){
+            return goal - (bigCount * largeKilo) <= smallCount;
+        }
+        return false;
     }
 }
