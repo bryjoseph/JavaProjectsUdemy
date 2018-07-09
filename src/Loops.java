@@ -130,6 +130,9 @@ public class Loops {
 
         //code test 16
         System.out.println(canPack(2,1,5));
+
+        // code test 17
+        System.out.println(getLargestPrime(0));
     }
 
 
@@ -448,5 +451,19 @@ public class Loops {
             return goal - (bigCount * largeKilo) <= smallCount;
         }
         return false;
+    }
+
+    public static int getLargestPrime(int number) {
+        if(number < 2) return -1;
+
+        int p=0;
+
+        for(int i = 2; number > 1; i++) {
+            while(number % i == 0) {
+                p = i;
+                number /= i;
+            }
+        }
+        return p;
     }
 }
