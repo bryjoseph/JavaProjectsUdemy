@@ -2,24 +2,25 @@ package com.arraysChallenges;
 
 import java.util.Scanner;
 
-public class Main {
-
-    private static Scanner scanner = new Scanner(System.in);
+public class ArrayMain {
 
     public static void main(String[] args) {
 
-        int[] myIntArray = getIntegers(5);
+        int[] myIntArray = getIntegers(6);
         int[] mySortedIntArray = sortIntegers(myIntArray);
         printArray(mySortedIntArray);
-        scanner.close();
     }
 
     public static int[] getIntegers(int number) {
         int[] array = new int[number];
+
+        Scanner scanner = new Scanner(System.in);
+
         System.out.println("Enter " + number + " numbers to create an array of that length: \r");
         for(int i = 0; i < array.length; i++) {
             array[i] = scanner.nextInt();
         }
+        scanner.close();
         return array;
     }
 
