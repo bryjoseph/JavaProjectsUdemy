@@ -133,6 +133,9 @@ public class Loops {
 
         // code test 17
         System.out.println(getLargestPrime(0));
+
+        // code test 18
+        printSquareStar(10);
     }
 
 
@@ -465,5 +468,21 @@ public class Loops {
             }
         }
         return p;
+    }
+
+    public static void printSquareStar(int number) {
+        if(number < 5) {
+            System.out.println("Invalid value");
+            return;
+        }
+        for (int i = 1; i <= number; i++)  {
+            String s = "";
+            for (int j = 1; j <= number; j++)  {
+                s += ((i==1) || (i==number)                     // top and bottom rows
+                ||    (j==1) || (j==number)                     // left and right edges
+                ||    (j==i) || (j==(number-i+1)))? "*" : " ";  // stars in the middle
+            }
+            System.out.println(s);
+        }
     }
 }
