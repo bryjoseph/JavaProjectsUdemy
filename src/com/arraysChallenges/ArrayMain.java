@@ -7,6 +7,7 @@ public class ArrayMain {
 
     private static Scanner scanner = new Scanner(System.in);
     private static GroceryList groceryList = new GroceryList();
+    private static MobilePhone contactList = new MobilePhone("521_310_2233");
 
     public static void main(String[] args) {
 
@@ -34,10 +35,46 @@ public class ArrayMain {
 //        arrayReverse(testArray);
 //        System.out.println(Arrays.toString(testArray));
 
-        // ArrayList challenges 1 ()
+        // ArrayList challenges 1 (Grocery List)
+//        boolean quit = false;
+//        int choice;
+//        printInstructions();
+//
+//        while(!quit) {
+//            System.out.println("Enter your choice: ");
+//            choice = scanner.nextInt();
+//            scanner.nextLine();
+//
+//            switch(choice) {
+//                case 0:
+//                    printInstructions();
+//                    break;
+//                case 1:
+//                    groceryList.printGroceryList();
+//                    break;
+//                case 2:
+//                    addGroceryItem();
+//                    break;
+//                case 3:
+//                    updateGroceryList();
+//                    break;
+//                case 4:
+//                    removeGroceryItem();
+//                    break;
+//                case 5:
+//                    findGroceryItem();
+//                    break;
+//                case 6:
+//                    quit = true;
+//                    break;
+//            }
+//        }
+
+
+      // ArrayList challenge 2 (Contact List)
         boolean quit = false;
         int choice;
-        printInstructions();
+        printMobilePhoneInstructions();
 
         while(!quit) {
             System.out.println("Enter your choice: ");
@@ -46,22 +83,22 @@ public class ArrayMain {
 
             switch(choice) {
                 case 0:
-                    printInstructions();
+                    printMobilePhoneInstructions();
                     break;
                 case 1:
-                    groceryList.printGroceryList();
+                    contactList.printContactList();
                     break;
                 case 2:
-                    addGroceryItem();
+                    addContact();
                     break;
                 case 3:
-                    updateGroceryList();
+                    updateContact();
                     break;
                 case 4:
-                    removeGroceryItem();
+                    removeContact();
                     break;
                 case 5:
-                    findGroceryItem();
+                    queryContact();
                     break;
                 case 6:
                     quit = true;
@@ -237,6 +274,80 @@ public class ArrayMain {
         }
     }
 
+    public static void printMobilePhoneInstructions() {
+        System.out.println("\n Press one option to continue ");
+        System.out.println("\t Press 0 - To print the user options");
+        System.out.println("\t Press 1 - To print the mobile contact list");
+        System.out.println("\t Press 2 - To add a contact to the contact list");
+        System.out.println("\t Press 3 - To modify a contact on the contact list");
+        System.out.println("\t Press 4 - To remove a person from the contact list");
+        System.out.println("\t Press 5 - To search for an person on the contact list");
+        System.out.println("\t Press 6 - To quit the application");
+    }
 
+    private static void addContact() {
+        System.out.print("Please enter the new contact name: ");
+        String contactName = scanner.nextLine();
+        System.out.println(" and contact number: ");
+        String contactNumber = scanner.nextLine();
+        Contact newContact = Contact.createContact(contactName, contactNumber);
+        if(contactList.addMobileContact(newContact)) {
+            System.out.println("Action completed");
+        } else {
+            System.out.println("Action cancelled");
+        }
 
+    }
+
+    public static void updateContact() {
+        // first gather the name of the contact the user wants to update
+        System.out.print("Enter the original name of the contact to update: ");
+        String oldContactName = scanner.nextLine();
+        // new private method to return the contact instance for the name passed in
+        Contact oldContact = contactList.queryContactList(oldContactName);
+
+        if(oldContactName == null) {
+            // if null, a match not found, and the update cannot take place
+            System.out.println("No contact was found with that name");
+        }
+        // if not null there was a match and the update can proceed
+        System.out.print("Next enter the updated name: ");
+        String newContactName = scanner.nextLine();
+        System.out.print("Finally enter the updated number: ");
+        String newContactNumber = scanner.nextLine();
+        Contact newContact = Contact.createContact(newContactName, newContactNumber);
+        if(contactList.updateContactList(oldContact, newContact)) {
+            System.out.println("Action completed");
+        } else {
+            System.out.println("Action cancelled");
+        }
+    }
+
+    public static void removeContact() {
+        System.out.print("Please enter the contact to remove: ");
+        String contactName = scanner.nextLine();
+
+        Contact contactToRemove = contactList.queryContactList(contactName);
+        if(contactName == null) {
+            System.out.println("A contact was not found with that name");
+        }
+
+        if(contactList.removeContact(contactToRemove)) {
+            System.out.println("Action completed");
+        } else {
+            System.out.println("Action cancelled");
+        }
+    }
+
+    public static void queryContact() {
+        System.out.print("Please enter a contact name to query: ");
+        String contactName = scanner.nextLine();
+
+        Contact contactToQuery = contactList.queryContactList(contactName);
+
+        if (contactName == null) {
+            System.out.println("A contact was not found with that name");
+        }
+        System.out.println("Contact information found: " + contactToQuery.getName() + " --> " + contactToQuery.getNumber());
+    }
 }
