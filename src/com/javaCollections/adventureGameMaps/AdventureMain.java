@@ -1,4 +1,4 @@
-package com.javaCollections.adventureGame;
+package com.javaCollections.adventureGameMaps;
 
 import java.util.HashMap;
 import java.util.Map;
